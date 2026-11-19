@@ -1,0 +1,3302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jejak Sejarah — Ular Tangga 3D Orde Baru</title>
+
+<!-- Dikembangkan dari kode pengguna: [3] -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+:root {
+  --wood: #754522;
+  --wood-light: #a96f3e;
+  --cream: #fff2d7;
+  --gold: #e7b85d;
+  --ink: #382516;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  color: var(--cream);
+  background: radial-gradient(
+    ellipse at top,
+    #a8794c 0,
+    #4b2d1c 62%,
+    #28190f 100%
+  );
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #75c7ff;
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+header {
+  max-width: 1400px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  font-size: 30px;
+  background: linear-gradient(145deg, #f5d58d, #a66b35);
+  padding: 10px 14px;
+  border-radius: 13px;
+  box-shadow: inset 0 2px 5px #fff8, 0 5px 0 #4c2b17;
+}
+
+.brand small {
+  display: block;
+  letter-spacing: 2px;
+  font-size: 10px;
+  color: #f3d99f;
+  font-weight: 800;
+}
+
+.brand strong {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+}
+
+.sound {
+  background: #fff0d2;
+  color: #4a2d18;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-weight: 800;
+  box-shadow: 0 4px 0 #9b673b;
+}
+
+.wrap {
+  width: min(1360px, 96%);
+  margin: 10px auto 40px;
+}
+
+.wood-panel {
+  background: repeating-linear-gradient(
+    4deg,
+    #986039 0 8px,
+    #a96e40 9px 17px,
+    #89552f 18px 21px
+  );
+  border: 8px solid #5a351d;
+  border-radius: 24px;
+  box-shadow: inset 0 0 0 2px #d5a36b, 0 18px 40px #1b100b99;
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.hero {
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: #4d2d19;
+  border: 1px solid #e6bd77;
+  color: #f8d99d;
+  padding: 8px 15px;
+  border-radius: 30px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+h1 {
+  font: 800 clamp(32px, 5vw, 58px)/1.05 "Playfair Display", serif;
+  color: #ffe4a7;
+  text-shadow: 0 4px 0 #553018;
+  margin: 16px 0 8px;
+}
+
+.sub {
+  color: #ffebc9;
+  margin: 0 auto 22px;
+  max-width: 700px;
+  line-height: 1.7;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 22px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.kids-art {
+  background: linear-gradient(145deg, #f7e4bd, #d7ad72);
+  border: 7px solid #633c21;
+  border-radius: 22px;
+  padding: 10px;
+}
+
+.kids-art svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.setup {
+  background: #f8e9cc;
+  color: #432b1a;
+  border: 5px solid #704321;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 0 #4b2c18;
+}
+
+.setup h2 {
+  font: 800 26px "Playfair Display", serif;
+  margin: 0 0 7px;
+  color: #74451f;
+}
+
+.setup p {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.field {
+  margin: 15px 0;
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 7px;
+  color: #70451f;
+}
+
+.field input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #c99a60;
+  border-radius: 10px;
+  background: #fffaf0;
+  color: #382516;
+}
+
+.mode-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.mode {
+  background: #e8d1a9;
+  border: 2px solid #c99a60;
+  color: #573719;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 800;
+}
+
+.mode.selected {
+  background: #714522;
+  color: #fff1d2;
+  border-color: #e6bc75;
+}
+
+.primary {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: linear-gradient(#ffe4a0, #d99d42);
+  color: #492d17;
+  font-weight: 800;
+  box-shadow: 0 5px 0 #75451e;
+  margin-top: 10px;
+}
+
+.primary:hover:not(:disabled) {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.note {
+  font-size: 11px;
+  color: #77502d;
+}
+
+.topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.topline h2 {
+  font: 800 26px "Playfair Display", serif;
+  margin: 0;
+  color: #ffe2a1;
+}
+
+.back {
+  padding: 9px 13px;
+  border-radius: 10px;
+  background: #f4dfba;
+  color: #54351d;
+  font-weight: 800;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 18px;
+  align-items: start;
+}
+
+.board-card {
+  min-width: 0;
+}
+
+.board-tools {
+  display: flex;
+  gap: 7px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.board-tools button {
+  padding: 9px 12px;
+  background: #ffe4ac;
+  color: #54321b;
+  border-radius: 10px;
+  border: 2px solid #976431;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.board-tools button[aria-pressed="true"] {
+  background: #805128;
+  color: #ffedc6;
+  border-color: #e7bd76;
+}
+
+.board-stage {
+  perspective: 1500px;
+  padding: 25px 18px 65px;
+}
+
+.board-object {
+  transform: rotateX(24deg) rotateZ(-3deg);
+  transition: transform .6s;
+  border: 8px solid #75451e;
+  border-radius: 15px;
+  box-shadow:
+    0 4px #cb9558,
+    0 9px #70431d,
+    0 15px #503018,
+    0 21px #633818,
+    5px 37px 26px #211009aa;
+}
+
+.board-stage.top-view .board-object {
+  transform: rotateX(0) rotateZ(0);
+}
+
+.board-frame {
+  padding: 10px;
+  border-radius: 9px;
+  background: repeating-linear-gradient(
+    3deg,
+    #a36c3b 0 7px,
+    #89582e 8px 12px
+  );
+}
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-rows: repeat(10, minmax(0, 1fr));
+  aspect-ratio: 1;
+  background: #e8c995;
+  border: 3px solid #f4dcae;
+  overflow: hidden;
+  border-radius: 7px;
+  isolation: isolate;
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #754c2b88;
+  color: #432916;
+  font-weight: 800;
+  background: repeating-linear-gradient(
+    0deg,
+    #e9c78e 0 8px,
+    #e2bc7d 9px 11px
+  );
+  box-shadow: inset 1px 1px #ffe9bb88, inset -1px -1px #70421d88;
+}
+
+.cell:nth-child(4n+2) {
+  background: #d9ae70;
+}
+
+.cell.start {
+  background: #b6c58a;
+}
+
+.cell.finish {
+  background: #f1d17b;
+}
+
+.number {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: clamp(8px, 1vw, 13px);
+  z-index: 4;
+  color: #503019;
+}
+
+.special {
+  position: absolute;
+  right: 2px;
+  bottom: 1px;
+  z-index: 4;
+  font-size: clamp(6px, .8vw, 10px);
+  color: #57361b;
+}
+
+.tokens {
+  z-index: 6;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
+}
+
+.pawn {
+  display: block;
+  position: relative;
+  width: clamp(13px, 2vw, 27px);
+  height: clamp(19px, 3vw, 38px);
+  filter: drop-shadow(3px 5px 2px #28140988);
+  transform: translateY(-3px);
+}
+
+.pawn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 26%;
+  width: 48%;
+  height: 38%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 25%,
+    #fff9,
+    var(--p) 50%,
+    var(--dark)
+  );
+  z-index: 2;
+}
+
+.pawn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 8%;
+  width: 84%;
+  height: 65%;
+  border-radius: 45% 45% 35% 35%;
+  background: linear-gradient(100deg, #fff9, var(--p) 40%, var(--dark));
+  border-bottom: 4px solid var(--dark);
+}
+
+.pawn.red {
+  --p: #ee514a;
+  --dark: #8f211b;
+}
+
+.pawn.blue {
+  --p: #4c9bed;
+  --dark: #1b4b94;
+}
+
+#boardArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.snake-creature {
+  filter: drop-shadow(2px 4px 1px #39210e66);
+}
+
+.side {
+  display: grid;
+  gap: 13px;
+}
+
+.panel {
+  background: linear-gradient(145deg, #754a2a, #4c2d1b);
+  border: 2px solid #c18b50;
+  border-radius: 17px;
+  padding: 16px;
+  box-shadow: 0 8px 18px #1b100b77;
+}
+
+.panel h3 {
+  font: 700 20px "Playfair Display", serif;
+  color: #ffe1a0;
+  margin: 0 0 12px;
+}
+
+.rank-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff25;
+}
+
+.rank-row.current {
+  background: #ffdc8712;
+  border-radius: 8px;
+}
+
+.rank-info {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.rank-info small {
+  display: block;
+  color: #eed7b4;
+  margin-top: 4px;
+}
+
+.rank-num {
+  font-weight: 800;
+  color: #ffe09b;
+}
+
+.medals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.medal {
+  font-size: 10px;
+  background: #f5d58d;
+  color: #432a18;
+  border-radius: 12px;
+  padding: 4px 7px;
+}
+
+.medal-guide {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #efd9b9;
+  margin-top: 10px;
+}
+
+.dicebox {
+  text-align: center;
+  background: #ffffff12;
+  border-radius: 13px;
+  padding: 12px;
+}
+
+.dice {
+  font-size: 64px;
+  display: block;
+}
+
+.dice.rolling {
+  animation: spin .12s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg) scale(1.08);
+  }
+}
+
+.turn {
+  font-weight: 800;
+  color: #ffe3a2;
+}
+
+.action {
+  width: 100%;
+  padding: 12px;
+  border-radius: 11px;
+  margin-top: 9px;
+  font-weight: 800;
+}
+
+.action.gold {
+  background: linear-gradient(#ffe4a0, #d99d42);
+  color: #4b2d17;
+  box-shadow: 0 4px 0 #75451e;
+}
+
+.action.ghost {
+  background: #ffffff18;
+  color: #fff0d4;
+  border: 1px solid #ffffff35;
+}
+
+#status {
+  margin-top: 10px;
+  background: #2d1a10aa;
+  border: 1px solid #ffffff22;
+  border-radius: 11px;
+  padding: 11px;
+  min-height: 55px;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  color: #ffe9c6;
+}
+
+.rules,
+.gift-small {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #f5dfbd;
+}
+
+.gift-progress-row {
+  margin: 9px 0;
+  font-size: 12px;
+}
+
+.gift-meter {
+  height: 8px;
+  border-radius: 8px;
+  background: #3e2517;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.gift-meter span {
+  display: block;
+  height: 100%;
+  background: #f4cf82;
+}
+
+.gift-card {
+  display: block;
+  width: 135px;
+  min-height: 165px;
+  margin: 14px auto;
+  padding: 16px;
+  border: 5px double #ffe5a8;
+  border-radius: 14px;
+  background: repeating-linear-gradient(
+    45deg,
+    #74451f 0 8px,
+    #89592e 8px 16px
+  );
+  color: #ffe3a3;
+  font-weight: 800;
+  transition: transform .2s;
+  box-shadow: 0 6px 0 #392211;
+}
+
+.gift-card.ready {
+  background: linear-gradient(145deg, #ffe7a5, #bf8837);
+  color: #513019;
+}
+
+.gift-card:not(:disabled):hover {
+  transform: translateY(-4px) rotate(-3deg);
+}
+
+.gift-mark {
+  display: block;
+  font-size: 46px;
+  margin-bottom: 10px;
+}
+
+.audio-controls {
+  font-size: 12px;
+  text-align: center;
+}
+
+.audio-controls button {
+  margin: 4px;
+  padding: 9px;
+  border-radius: 9px;
+  background: #ffe3aa;
+  color: #513019;
+  font-size: 11px;
+}
+
+.audio-controls input {
+  max-width: 130px;
+  vertical-align: middle;
+}
+
+.audio-prompt {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background: #ffedc7;
+  color: #57341b;
+  border: 2px solid #b17b38;
+  border-radius: 25px;
+  padding: 12px 18px;
+  max-width: 94vw;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 5px 20px #0006;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #160d08df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal {
+  width: min(550px, 100%);
+  max-height: 94vh;
+  overflow-y: auto;
+  background: linear-gradient(145deg, #fff2d7, #e8c997);
+  border: 7px solid #704321;
+  border-radius: 22px;
+  color: #432a18;
+  padding: 24px;
+  box-shadow: 0 20px 70px #000b;
+  text-align: center;
+}
+
+.kicker {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #94602d;
+}
+
+.modal h2 {
+  font: 800 27px "Playfair Display", serif;
+  color: #704321;
+  margin: 8px 0;
+}
+
+.question {
+  font-weight: 800;
+  line-height: 1.55;
+  margin: 18px 0;
+}
+
+.quiz-hint {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.answer {
+  padding: 13px;
+  border-radius: 11px;
+  background: #e1c79b;
+  color: #492e18;
+  font-weight: 800;
+  border: 2px solid #bd8d54;
+  text-align: left;
+}
+
+.answer:hover:not(:disabled) {
+  background: #f6d58d;
+}
+
+.answer:disabled {
+  opacity: 1;
+}
+
+.answer.selected {
+  outline: 3px solid #765021;
+  background: #ffe19c;
+}
+
+.answer.correct {
+  background: #b7e9c6;
+  border-color: #3e8552;
+}
+
+.answer.wrong {
+  background: #f2b2a9;
+  border-color: #bd4035;
+}
+
+.feedback {
+  min-height: 30px;
+  font-weight: 800;
+  margin: 12px 0 2px;
+  line-height: 1.6;
+}
+
+.big-x {
+  font-size: 100px;
+  line-height: 1;
+  color: #d51e19;
+  text-shadow: 0 5px 0 #7a0d0b, 0 0 22px #ffb0a8;
+  animation: wrongPop .35s ease;
+}
+
+@keyframes wrongPop {
+  0% { transform: scale(.2) rotate(-25deg); }
+  70% { transform: scale(1.2) rotate(8deg); }
+  100% { transform: scale(1); }
+}
+
+.timer-wrap {
+  margin: 14px 0;
+}
+
+.timer-label {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.timer-track {
+  height: 9px;
+  background: #d1b589;
+  border-radius: 9px;
+  overflow: hidden;
+  margin-top: 7px;
+}
+
+.timer-fill {
+  height: 100%;
+  width: 100%;
+  background: #26734b;
+  transition: width .1s linear;
+}
+
+.timer-wrap.urgent {
+  color: #b21f1b;
+}
+
+.timer-wrap.urgent .timer-fill {
+  background: #c92d26;
+}
+
+.gift-result {
+  padding: 28px;
+  margin: 18px 0;
+  background: linear-gradient(145deg, #ffeeb0, #d5a04b);
+  border: 4px double #875326;
+  border-radius: 15px;
+  color: #54321b;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.shuffling {
+  animation: cardShake .15s infinite alternate;
+}
+
+@keyframes cardShake {
+  to { transform: rotate(4deg) scale(.97); }
+}
+
+footer {
+  text-align: center;
+  padding: 0 12px 25px;
+  color: #f1d8b3;
+  font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .side {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 750px) {
+  .board-stage {
+    perspective: 1000px;
+    padding: 16px 9px 48px;
+  }
+
+  .board-object {
+    transform: rotateX(18deg) rotateZ(-2deg);
+    border-width: 5px;
+  }
+
+  .board-frame {
+    padding: 6px;
+  }
+
+  .pawn {
+    width: clamp(12px, 3.2vw, 22px);
+    height: clamp(17px, 4.5vw, 30px);
+  }
+}
+
+@media (max-width: 650px) {
+  header {
+    padding: 14px;
+  }
+
+  .brand strong {
+    font-size: 17px;
+  }
+
+  .brand small {
+    font-size: 8px;
+  }
+
+  .intro-grid,
+  .side {
+    grid-template-columns: 1fr;
+  }
+
+  .wood-panel {
+    padding: 15px;
+  }
+
+  .topline {
+    align-items: flex-start;
+  }
+
+  .topline h2 {
+    font-size: 20px;
+  }
+
+  .number {
+    font-size: clamp(8px, 2vw, 12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board-object,
+  .gift-card {
+    transition: none;
+  }
+
+  .shuffling,
+  .dice.rolling,
+  .big-x {
+    animation: none;
+  }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="brand">
+    <div class="brand-icon">JS</div>
+    <div>
+      <small>MEDIA PEMBELAJARAN SEJARAH</small>
+      <strong>JEJAK SEJARAH</strong>
+    </div>
+  </div>
+  <button class="sound" id="soundToggle" onclick="toggleSound()">
+    SUARA: ON
+  </button>
+</header>
+
+<main>
+  <section id="homePage">
+    <div class="wrap wood-panel">
+      <div class="hero">
+        <span class="eyebrow">GAME EDUKASI INTERAKTIF</span>
+        <h1>ULAR TANGGA ORDE BARU</h1>
+        <p class="sub">
+          Ajak teman bermain, jawab tantangan sejarah, dan jelajahi
+          perjalanan Indonesia pada masa Orde Baru!
+        </p>
+      </div>
+
+      <div class="intro-grid">
+        <div class="kids-art">
+          <svg viewBox="0 0 650 440" role="img"
+               aria-label="Ilustrasi anak-anak bermain ular tangga">
+            <defs>
+              <linearGradient id="wood" x2="0" y2="1">
+                <stop stop-color="#d9a66b"/>
+                <stop offset="1" stop-color="#8b552d"/>
+              </linearGradient>
+            </defs>
+
+            <rect x="8" y="8" width="634" height="424"
+                  rx="22" fill="#f3dfb9"/>
+
+            <path d="M25 340 Q325 290 625 340 L625 420 L25 420Z"
+                  fill="#c69a65"/>
+
+            <g transform="translate(205 110) rotate(-7 120 100)">
+              <rect x="-9" y="-9" width="258" height="218"
+                    rx="12" fill="#6b3e20"/>
+              <rect width="240" height="200"
+                    rx="5" fill="url(#wood)"/>
+
+              <g stroke="#6b4528" stroke-width="1">
+                <path d="M0 40H240M0 80H240M0 120H240M0 160H240
+                         M48 0V200M96 0V200M144 0V200M192 0V200"/>
+              </g>
+
+              <g fill="#f8e2b6" font-size="15" font-weight="bold">
+                <text x="8" y="22">1</text>
+                <text x="55" y="22">2</text>
+                <text x="103" y="22">3</text>
+                <text x="151" y="22">4</text>
+                <text x="199" y="22">5</text>
+                <text x="8" y="62">10</text>
+                <text x="55" y="62">9</text>
+                <text x="103" y="62">8</text>
+                <text x="151" y="62">7</text>
+                <text x="199" y="62">6</text>
+              </g>
+
+              <path d="M25 145 Q85 95 120 135 T205 65"
+                    fill="none" stroke="#327c43"
+                    stroke-width="12" stroke-linecap="round"/>
+
+              <path d="M120 180L165 95M137 185L182 100"
+                    stroke="#704522" stroke-width="7"/>
+
+              <path d="M130 165L147 170M140 145L157 150
+                       M150 125L167 130M160 105L177 110"
+                    stroke="#e9c17a" stroke-width="5"/>
+
+              <circle cx="29" cy="178" r="12" fill="#cf3d36"/>
+              <circle cx="75" cy="178" r="12" fill="#3978c8"/>
+            </g>
+
+            <g transform="translate(45 125)">
+              <ellipse cx="75" cy="242" rx="66" ry="15"
+                       fill="#8c6744" opacity=".35"/>
+              <path d="M35 150Q12 195 28 230L118 230Q135 184 108 150Z"
+                    fill="#3d78a8"/>
+              <path d="M48 225L42 280M95 225L108 280"
+                    stroke="#5b3826" stroke-width="20"
+                    stroke-linecap="round"/>
+              <path d="M25 280H58M94 280H125"
+                    stroke="#443021" stroke-width="13"
+                    stroke-linecap="round"/>
+              <circle cx="75" cy="100" r="48" fill="#c98758"/>
+              <path d="M28 95Q22 38 78 42Q126 42 122 98
+                       Q100 72 73 77Q48 77 28 95"
+                    fill="#29201b"/>
+              <circle cx="59" cy="103" r="4" fill="#302018"/>
+              <circle cx="91" cy="103" r="4" fill="#302018"/>
+              <path d="M64 124Q76 136 90 123"
+                    fill="none" stroke="#7e392d"
+                    stroke-width="4" stroke-linecap="round"/>
+              <path d="M39 158Q5 160 5 195M105 158Q140 153 158 176"
+                    fill="none" stroke="#c98758"
+                    stroke-width="16" stroke-linecap="round"/>
+            </g>
+
+            <g transform="translate(430 145)">
+              <ellipse cx="75" cy="222" rx="65" ry="14"
+                       fill="#8c6744" opacity=".35"/>
+              <path d="M38 135Q15 177 27 220H125Q138 173 107 135Z"
+                    fill="#d18b3f"/>
+              <path d="M48 215L40 265M102 215L115 265"
+                    stroke="#68422c" stroke-width="19"
+                    stroke-linecap="round"/>
+              <path d="M24 265H57M101 265H132"
+                    stroke="#443021" stroke-width="13"
+                    stroke-linecap="round"/>
+              <circle cx="78" cy="87" r="47" fill="#e0a16e"/>
+              <path d="M31 82Q29 30 81 30Q130 34 124 89
+                       Q105 62 79 67Q53 64 31 82"
+                    fill="#211b18"/>
+              <circle cx="62" cy="92" r="4" fill="#302018"/>
+              <circle cx="94" cy="92" r="4" fill="#302018"/>
+              <path d="M65 113Q79 126 94 112"
+                    fill="none" stroke="#873e30"
+                    stroke-width="4" stroke-linecap="round"/>
+              <path d="M40 147Q10 149 -5 175M111 147Q142 148 157 173"
+                    fill="none" stroke="#e0a16e"
+                    stroke-width="16" stroke-linecap="round"/>
+            </g>
+
+            <g fill="#8a542d" font-family="Georgia" font-weight="bold">
+              <text x="325" y="50" text-anchor="middle" font-size="25">
+                Belajar sambil bermain!
+              </text>
+              <text x="325" y="390" text-anchor="middle" font-size="17">
+                Naik tangga • Turun ular
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="setup">
+          <h2>Siap Bermain?</h2>
+          <p>
+            Atur pemain terlebih dahulu. Kamu bisa bermain
+            bersama teman atau melawan bot komputer.
+          </p>
+
+          <div class="field">
+            <label for="playerName">NAMA PEMAIN</label>
+            <input id="playerName" maxlength="30"
+                   value="Pemain 1" placeholder="Masukkan nama kamu">
+          </div>
+
+          <div class="field">
+            <label>MODE PERMAINAN</label>
+            <div class="mode-row">
+              <button class="mode selected" id="humanMode"
+                      onclick="setMode('human')">
+                2 Pemain
+              </button>
+              <button class="mode" id="botMode"
+                      onclick="setMode('bot')">
+                Lawan Bot
+              </button>
+            </div>
+          </div>
+
+          <div class="field" id="secondField">
+            <label for="secondName">NAMA PEMAIN 2</label>
+            <input id="secondName" maxlength="30"
+                   value="Pemain 2" placeholder="Nama teman">
+          </div>
+
+          <button class="primary" onclick="startGame()">
+            MULAI PERMAINAN
+          </button>
+
+          <p class="note">
+            58 soal sejarah • 8 soal kompleks • Timer 30 detik
+            • 100 kotak • Kartu hadiah • Efek suara
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gamePage" hidden>
+    <div class="wrap">
+      <div class="topline">
+        <h2>Papan Permainan — Jejak Sejarah</h2>
+        <button class="back" onclick="goHome()">Kembali</button>
+      </div>
+
+      <div class="game-layout">
+        <section class="board-card">
+          <div class="board-tools">
+            <button id="view3d" aria-pressed="true"
+                    onclick="setView(false)">
+              PAPAN 3D
+            </button>
+            <button id="viewTop" aria-pressed="false"
+                    onclick="setView(true)">
+              TAMPILAN ATAS
+            </button>
+            <button id="snakeMotion" aria-pressed="true"
+                    onclick="toggleSnakes()">
+              GERAK ULAR: ON
+            </button>
+          </div>
+
+          <div class="board-stage" id="boardStage">
+            <div class="board-object">
+              <div class="board-frame">
+                <div class="board" id="board"
+                     aria-label="Papan ular tangga seratus kotak"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="side">
+          <section class="panel">
+            <h3>Suara Permainan</h3>
+            <div class="audio-controls">
+              <button onclick="testHiss()">COBA DESIS ULAR</button>
+              <button id="musicButton" onclick="toggleMusic()">
+                MUSIK: ON
+              </button>
+              <br>
+              <label>
+                Volume
+                <input id="volumeSlider" type="range"
+                       min="0" max="100" value="65"
+                       oninput="setVolume(this.value)"
+                       aria-label="Volume suara permainan">
+              </label>
+              <span id="volumeLabel">65%</span>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h3>Kartu Hadiah</h3>
+            <div id="giftProgress" aria-live="polite"></div>
+
+            <button class="gift-card" id="sideGift"
+                    disabled onclick="openGift()">
+              <span class="gift-mark" aria-hidden="true">?</span>
+              <span id="giftLabel">TERKUNCI</span>
+            </button>
+
+            <p class="gift-small" id="giftHint">
+              Setiap 3 jawaban benar kumulatif membuka kartu.
+              Salah atau waktu habis tidak menghapus progres.
+            </p>
+          </section>
+
+          <section class="panel">
+            <h3>Papan Peringkat</h3>
+            <div id="leaderboard" aria-live="polite"></div>
+            <div class="medal-guide">
+              Urutan: posisi tertinggi, lalu poin terbanyak.
+              Posisi dan poin sama berarti seri.<br>
+              Penjawab Aktif: 5 soal dijawab.<br>
+              Ahli Sejarah: 5 jawaban benar.<br>
+              Penjelajah: pernah mencapai kotak 50.<br>
+              Juara: mencapai kotak 100.
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="dicebox">
+              <div class="turn">GILIRAN SEKARANG</div>
+              <span class="dice" id="dice">⚀</span>
+              <div class="turn" id="turnText">Pemain 1</div>
+            </div>
+
+            <button class="action gold" id="rollBtn"
+                    onclick="rollDice()">
+              KOCOK DADU
+            </button>
+
+            <button class="action ghost" onclick="restartGame()">
+              ULANG PERMAINAN
+            </button>
+
+            <div id="status" role="status">
+              Kocok dadu untuk memulai.
+            </div>
+          </section>
+
+          <section class="panel">
+            <h3>Cara Bermain</h3>
+            <div class="rules">
+              1. Pemain bergantian mengocok dadu.<br>
+              2. Jawab soal dalam waktu 30 detik.<br>
+              3. Jawaban benar mendapat 10 poin dan maju sesuai dadu.<br>
+              4. Jawaban salah atau waktu habis tidak membuat pemain maju.<br>
+              5. Soal kompleks harus dijawab dengan semua pilihan yang benar.<br>
+              6. Tangga membuat naik, ular membuat turun.<br>
+              7. Setiap 3 jawaban benar kumulatif mendapat kartu hadiah.<br>
+              8. Klik kartu di samping papan setelah soal ditutup.<br>
+              9. Progres kartu kembali 0/3 setelah hadiah digunakan.<br>
+              10. Perpindahan dari kartu tidak mengaktifkan ular atau tangga.<br>
+              11. Dadu harus tepat untuk mencapai kotak 100.<br>
+              12. Hadiah dapat mengantar pemain ke kotak 100.
+            </div>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  JEJAK SEJARAH • GAME ULAR TANGGA MATERI ORDE BARU
+</footer>
+
+<div class="overlay" id="quizOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true"
+       aria-labelledby="quizTitle">
+    <div class="kicker">TANTANGAN PENGETAHUAN • ORDE BARU</div>
+    <h2 id="quizTitle">Waktunya Menjawab!</h2>
+    <div class="kicker" id="questionNumber"></div>
+
+    <div class="timer-wrap" id="timerWrap">
+      <div class="timer-label" id="timerLabel" role="timer">
+        30 detik
+      </div>
+      <div class="timer-track">
+        <div class="timer-fill" id="timerFill"></div>
+      </div>
+    </div>
+
+    <p class="quiz-hint" id="quizHint"></p>
+    <p class="question" id="question"></p>
+    <div class="answers" id="answers"></div>
+
+    <button class="primary" id="submitComplex"
+            onclick="submitComplexAnswer()" hidden>
+      KIRIM JAWABAN
+    </button>
+
+    <div class="big-x" id="bigX" hidden>✕</div>
+    <p class="feedback" id="feedback" aria-live="polite"></p>
+
+    <button class="primary" id="nextBtn"
+            onclick="finishTurn()" hidden>
+      LANJUTKAN
+    </button>
+  </div>
+</div>
+
+<div class="overlay" id="giftOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true"
+       aria-labelledby="giftTitle">
+    <div class="kicker">HADIAH PENCAPAIAN</div>
+    <h2 id="giftTitle">Kartu Hadiah</h2>
+    <p id="giftOwner"></p>
+    <div class="gift-result" id="giftResult" aria-live="polite">
+      Kartu misteri
+    </div>
+    <p id="giftDetail"></p>
+
+    <button class="primary" id="shuffleBtn" onclick="shuffleGift()">
+      KOCOK KARTU
+    </button>
+
+    <button class="primary" id="useBtn" onclick="useGift()" hidden>
+      GUNAKAN HADIAH
+    </button>
+  </div>
+</div>
+
+<div class="overlay" id="winOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true"
+       aria-labelledby="winner">
+    <div class="kicker">PETUALANGAN SELESAI</div>
+    <h2 id="winner">PEMAIN MENANG!</h2>
+    <p id="finalScore"></p>
+    <button class="primary" onclick="restartGame()">MAIN LAGI</button>
+    <button class="primary" onclick="goHome()">HALAMAN AWAL</button>
+  </div>
+</div>
+
+<button class="audio-prompt" id="audioPrompt" onclick="enableAudio()">
+  AKTIFKAN SUARA PERMAINAN
+</button>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+const questions = [
+  {
+    q: "Siapa presiden Indonesia pada masa Orde Baru?",
+    a: ["Soekarno", "Soeharto", "B.J. Habibie", "Abdurrahman Wahid"],
+    c: 1
+  },
+  {
+    q: "Orde Baru mulai berkembang setelah peristiwa politik tahun ...",
+    a: ["1945", "1959", "1966", "1998"],
+    c: 2
+  },
+  {
+    q: "Masa pemerintahan Orde Baru berakhir pada tahun ...",
+    a: ["1965", "1975", "1988", "1998"],
+    c: 3
+  },
+  {
+    q: "Siapa presiden yang menggantikan Soeharto pada 1998?",
+    a: ["B.J. Habibie", "Megawati", "Soekarno", "Gus Dur"],
+    c: 0
+  },
+  {
+    q: "Apa kepanjangan Repelita?",
+    a: [
+      "Rencana Pembangunan Lima Tahun",
+      "Reformasi Pendidikan Lima Tahun",
+      "Rencana Pelajaran Tahunan",
+      "Republik Pembangunan Lima Tahun"
+    ],
+    c: 0
+  },
+  {
+    q: "Apa tujuan utama program Repelita?",
+    a: [
+      "Pembangunan nasional",
+      "Perang antarnegara",
+      "Membentuk kerajaan",
+      "Menghapus pendidikan"
+    ],
+    c: 0
+  },
+  {
+    q: "Program peningkatan hasil pertanian pada masa Orde Baru dikenal sebagai ...",
+    a: ["Revolusi Industri", "Revolusi Hijau", "Politik Etis", "Reformasi"],
+    c: 1
+  },
+  {
+    q: "Kekuatan politik yang sangat dominan pada masa Orde Baru adalah ...",
+    a: ["Golkar", "PETA", "VOC", "Budi Utomo"],
+    c: 0
+  },
+  {
+    q: "Pemilu pertama pada masa Orde Baru dilaksanakan pada tahun ...",
+    a: ["1966", "1971", "1975", "1980"],
+    c: 1
+  },
+  {
+    q: "Soeharto mengundurkan diri pada tanggal ...",
+    a: [
+      "17 Agustus 1945",
+      "1 Juni 1945",
+      "21 Mei 1998",
+      "10 November 1945"
+    ],
+    c: 2
+  },
+  {
+    q: "Apa kepanjangan KKN?",
+    a: [
+      "Korupsi, Kolusi, Nepotisme",
+      "Kerja, Kegiatan, Nasional",
+      "Kebijakan, Keamanan, Negara",
+      "Koperasi, Keadilan, Nasional"
+    ],
+    c: 0
+  },
+  {
+    q: "Krisis ekonomi yang turut mendorong berakhirnya Orde Baru terjadi pada ...",
+    a: ["1970–1971", "1980–1981", "1997–1998", "2004–2005"],
+    c: 2
+  },
+  {
+    q: "Surat perintah yang berkaitan dengan peralihan kekuasaan pada 1966 adalah ...",
+    a: ["Supersemar", "Dekrit Presiden", "Piagam Jakarta", "Trikora"],
+    c: 0
+  },
+  {
+    q: "Penyederhanaan partai politik pada tahun 1973 disebut ...",
+    a: [
+      "Fusi partai politik",
+      "Revolusi Hijau",
+      "Dwifungsi ABRI",
+      "Otonomi daerah"
+    ],
+    c: 0
+  },
+  {
+    q: "Dwifungsi ABRI berarti peran ABRI dalam bidang ...",
+    a: [
+      "Pertahanan dan sosial politik",
+      "Pendidikan dan perdagangan",
+      "Pertanian dan kesehatan",
+      "Budaya dan olahraga"
+    ],
+    c: 0
+  },
+  {
+    q: "Salah satu dampak negatif pemerintahan Orde Baru adalah ...",
+    a: [
+      "Praktik KKN",
+      "Proklamasi kemerdekaan",
+      "Sumpah Pemuda",
+      "Konferensi Asia Afrika"
+    ],
+    c: 0
+  },
+  {
+    q: "Swasembada pangan berarti ...",
+    a: [
+      "Memenuhi kebutuhan pangan sendiri",
+      "Mengimpor semua makanan",
+      "Mengurangi hasil pertanian",
+      "Menghentikan pertanian"
+    ],
+    c: 0
+  },
+  {
+    q: "Berapa lama Soeharto memimpin Indonesia?",
+    a: [
+      "Sekitar 5 tahun",
+      "Sekitar 10 tahun",
+      "Sekitar 32 tahun",
+      "Sekitar 50 tahun"
+    ],
+    c: 2
+  },
+  {
+    q: "Pemerintahan Orde Baru sering dikritik karena cenderung ...",
+    a: ["Otoriter", "Monarki", "Tanpa pemerintahan", "Federal"],
+    c: 0
+  },
+  {
+    q: "Salah satu tuntutan gerakan Reformasi 1998 adalah ...",
+    a: [
+      "Pemberantasan KKN",
+      "Memperpanjang masa jabatan",
+      "Menghapus pemilu",
+      "Menghidupkan kolonialisme"
+    ],
+    c: 0
+  },
+  {
+    q: "Lembaga perencanaan pembangunan nasional dikenal dengan singkatan ...",
+    a: ["Bappenas", "KPU", "DPR", "MA"],
+    c: 0
+  },
+  {
+    q: "Istilah Orde Baru digunakan untuk menyebut masa pemerintahan setelah ...",
+    a: ["Orde Lama", "Reformasi", "VOC", "Masa kolonial Belanda"],
+    c: 0
+  },
+  {
+    q: "Salah satu fokus pembangunan Orde Baru adalah bidang ...",
+    a: [
+      "Ekonomi dan infrastruktur",
+      "Penjajahan",
+      "Perang dunia",
+      "Perdagangan budak"
+    ],
+    c: 0
+  },
+  {
+    q: "Gerakan Reformasi 1998 didorong antara lain oleh ...",
+    a: [
+      "Krisis ekonomi dan tuntutan perubahan",
+      "Keberhasilan penjajahan",
+      "Pembentukan VOC",
+      "Perang Diponegoro"
+    ],
+    c: 0
+  },
+  {
+    q: "Gerakan mahasiswa yang menjadi bagian penting perubahan politik 1998 berkaitan dengan ...",
+    a: [
+      "Gerakan Reformasi",
+      "Gerakan 30 September",
+      "Budi Utomo",
+      "Sarekat Dagang"
+    ],
+    c: 0
+  },
+  {
+    q: "Soeharto menjadi presiden setelah masa pemerintahan Soekarno.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Orde Baru berakhir pada tahun 1998.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Repelita merupakan program pembangunan lima tahunan.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Revolusi Hijau berkaitan dengan peningkatan produksi pertanian.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Pemilu pertama pada masa Orde Baru berlangsung pada 1971.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Soeharto mengundurkan diri pada 21 Mei 1998.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "KKN adalah singkatan dari Korupsi, Kolusi, dan Nepotisme.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Dwifungsi ABRI hanya berkaitan dengan bidang olahraga.",
+    a: ["Benar", "Salah"],
+    c: 1,
+    t: "tf"
+  },
+  {
+    q: "Golkar menjadi kekuatan politik yang dominan pada masa Orde Baru.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Krisis ekonomi Asia ikut memengaruhi Indonesia pada 1997–1998.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Supersemar dikeluarkan pada tahun 1966.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Penyederhanaan partai politik dilakukan pada tahun 1973.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Pada masa Orde Baru, pembangunan hanya berfokus pada bidang seni.",
+    a: ["Benar", "Salah"],
+    c: 1,
+    t: "tf"
+  },
+  {
+    q: "Swasembada pangan berarti negara mampu memenuhi kebutuhan pangannya sendiri.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "B.J. Habibie menggantikan Soeharto sebagai presiden pada 1998.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Reformasi 1998 antara lain menuntut pemberantasan KKN.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Orde Baru berlangsung sekitar 32 tahun.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Bappenas berkaitan dengan perencanaan pembangunan nasional.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Orde Baru dimulai setelah Reformasi 1998.",
+    a: ["Benar", "Salah"],
+    c: 1,
+    t: "tf"
+  },
+  {
+    q: "Kebijakan pembangunan pada masa Orde Baru mencakup pembangunan infrastruktur.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Krisis ekonomi 1997–1998 menjadi salah satu faktor berakhirnya Orde Baru.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Pada masa Orde Baru, pemilihan umum tidak pernah dilaksanakan.",
+    a: ["Benar", "Salah"],
+    c: 1,
+    t: "tf"
+  },
+  {
+    q: "Gerakan mahasiswa turut berperan dalam Reformasi 1998.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Fusi partai politik merupakan penyederhanaan partai pada 1973.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Soeharto adalah presiden pertama Republik Indonesia.",
+    a: ["Benar", "Salah"],
+    c: 1,
+    t: "tf"
+  },
+  {
+    q: "Salah satu kritik terhadap Orde Baru adalah praktik pemerintahan yang otoriter.",
+    a: ["Benar", "Salah"],
+    c: 0,
+    t: "tf"
+  },
+  {
+    q: "Pilih pernyataan yang sesuai tentang akhir Orde Baru.",
+    a: [
+      "Soeharto mengundurkan diri pada 21 Mei 1998.",
+      "B.J. Habibie menggantikan Soeharto.",
+      "Orde Baru berakhir pada 1988.",
+      "Krisis 1997–1998 turut mendorong berakhirnya Orde Baru."
+    ],
+    c: [0, 1, 3],
+    t: "complex"
+  },
+  {
+    q: "Pilih konsep yang berkaitan dengan pembangunan masa Orde Baru.",
+    a: [
+      "Repelita",
+      "Revolusi Hijau",
+      "Pembangunan infrastruktur",
+      "Penghapusan seluruh pendidikan"
+    ],
+    c: [0, 1, 2],
+    t: "complex"
+  },
+  {
+    q: "Pilih pernyataan yang benar mengenai politik Orde Baru.",
+    a: [
+      "Pemilu pertama masa Orde Baru berlangsung pada 1971.",
+      "Fusi partai berlangsung pada 1973.",
+      "Tidak pernah ada pemilu selama Orde Baru.",
+      "Golkar sangat dominan."
+    ],
+    c: [0, 1, 3],
+    t: "complex"
+  },
+  {
+    q: "Pilih unsur yang termasuk dalam singkatan KKN.",
+    a: ["Korupsi", "Kolusi", "Nepotisme", "Nasionalisasi"],
+    c: [0, 1, 2],
+    t: "complex"
+  },
+  {
+    q: "Pilih bidang peran ABRI dalam konsep Dwifungsi ABRI.",
+    a: [
+      "Pertahanan",
+      "Sosial politik",
+      "Perdagangan internasional sebagai fungsi pokok",
+      "Olahraga sebagai fungsi pokok"
+    ],
+    c: [0, 1],
+    t: "complex"
+  },
+  {
+    q: "Pilih pernyataan yang benar tentang Repelita dan pertanian.",
+    a: [
+      "Repelita berarti Rencana Pembangunan Lima Tahun.",
+      "Revolusi Hijau berkaitan dengan peningkatan hasil pertanian.",
+      "Repelita bertujuan menghapus pendidikan.",
+      "Repelita berkaitan dengan pembangunan nasional."
+    ],
+    c: [0, 1, 3],
+    t: "complex"
+  },
+  {
+    q: "Pilih pernyataan yang benar tentang perubahan politik 1998.",
+    a: [
+      "Gerakan mahasiswa turut berperan dalam Reformasi.",
+      "Soeharto digantikan B.J. Habibie.",
+      "Orde Baru baru dimulai sesudah Reformasi.",
+      "Krisis ekonomi menjadi salah satu faktor perubahan."
+    ],
+    c: [0, 1, 3],
+    t: "complex"
+  },
+  {
+    q: "Pilih pernyataan yang sesuai tentang masa Orde Baru.",
+    a: [
+      "Soeharto menjadi presiden pada masa Orde Baru.",
+      "Supersemar berkaitan dengan peralihan kekuasaan pada 1966.",
+      "Soeharto adalah presiden pertama Indonesia.",
+      "Pemerintahan Orde Baru mendapat kritik terkait KKN."
+    ],
+    c: [0, 1, 3],
+    t: "complex"
+  }
+];
+
+const ladders = {
+  4: 14,
+  9: 31,
+  20: 38,
+  28: 47,
+  40: 59,
+  51: 67,
+  63: 81,
+  71: 91
+};
+
+const snakes = {
+  17: 7,
+  54: 34,
+  62: 19,
+  64: 60,
+  87: 24,
+  93: 73,
+  95: 75,
+  99: 78
+};
+
+const faces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+
+let mode = "human";
+let players = [];
+let currentPlayer = 0;
+let phase = "home";
+let diceValue = 1;
+let pendingQuestion = null;
+let questionDeck = [];
+let turnCount = 0;
+let selectedOptions = new Set();
+let lastCorrect = false;
+let deadline = 0;
+let quizTimer = null;
+let rollingTimer = null;
+let giftReward = null;
+let lastWarningSecond = null;
+
+let snakesMoving =
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const scheduled = new Set();
+
+function later(fn, delay) {
+  const id = setTimeout(() => {
+    scheduled.delete(id);
+    fn();
+  }, delay);
+
+  scheduled.add(id);
+  return id;
+}
+
+function clearTasks() {
+  scheduled.forEach(clearTimeout);
+  scheduled.clear();
+
+  clearInterval(quizTimer);
+  clearInterval(rollingTimer);
+
+  quizTimer = null;
+  rollingTimer = null;
+}
+
+function show(id, visible) {
+  $(id).hidden = !visible;
+}
+
+function setMode(value) {
+  mode = value;
+
+  $("humanMode").classList.toggle("selected", value === "human");
+  $("botMode").classList.toggle("selected", value === "bot");
+
+  show("secondField", value !== "bot");
+}
+
+function makePlayer(name, bot = false) {
+  return {
+    name,
+    bot,
+    position: 0,
+    score: 0,
+    attempts: 0,
+    correct: 0,
+    progress: 0,
+    furthest: 0,
+    champion: false
+  };
+}
+
+function startGame() {
+  enableAudio();
+
+  const firstName = $("playerName").value.trim() || "Pemain 1";
+  const secondName = $("secondName").value.trim() || "Pemain 2";
+
+  players = [
+    makePlayer(firstName),
+    makePlayer(mode === "bot" ? "Bot Sejarah" : secondName, mode === "bot")
+  ];
+
+  show("homePage", false);
+  show("gamePage", true);
+
+  restartGame();
+  playSound("start");
+}
+
+function restartGame() {
+  if (!players.length) return;
+
+  clearTasks();
+
+  players = players.map(p => makePlayer(p.name, p.bot));
+  currentPlayer = 0;
+  phase = "ready";
+  diceValue = 1;
+  questionDeck = [];
+  turnCount = 0;
+  giftReward = null;
+  pendingQuestion = null;
+  lastCorrect = false;
+
+  show("quizOverlay", false);
+  show("giftOverlay", false);
+  show("winOverlay", false);
+
+  $("dice").classList.remove("rolling");
+  $("dice").textContent = faces[0];
+  $("status").textContent =
+    "Permainan baru dimulai. Kocok dadu untuk memulai!";
+
+  updateBoard();
+  scheduleBot();
+}
+
+function goHome() {
+  clearTasks();
+  phase = "home";
+
+  show("quizOverlay", false);
+  show("giftOverlay", false);
+  show("winOverlay", false);
+  show("gamePage", false);
+  show("homePage", true);
+
+  $("dice").classList.remove("rolling");
+}
+
+function setView(top) {
+  $("boardStage").classList.toggle("top-view", top);
+  $("view3d").setAttribute("aria-pressed", String(!top));
+  $("viewTop").setAttribute("aria-pressed", String(top));
+}
+
+function center(n) {
+  const row = Math.floor((n - 1) / 10);
+  const offset = (n - 1) % 10;
+  const col = row % 2 === 0 ? offset : 9 - offset;
+
+  return {
+    x: (col + .5) * 100,
+    y: (9 - row + .5) * 100
+  };
+}
+
+function svgEl(tag, attrs = {}) {
+  const element = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    tag
+  );
+
+  Object.entries(attrs).forEach(([key, value]) => {
+    element.setAttribute(key, value);
+  });
+
+  return element;
+}
+
+function createBoard() {
+  const board = $("board");
+  board.replaceChildren();
+
+  for (let row = 9; row >= 0; row--) {
+    const numbers = Array.from(
+      { length: 10 },
+      (_, i) => row * 10 + i + 1
+    );
+
+    if (row % 2 === 1) numbers.reverse();
+
+    numbers.forEach(n => {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.id = "cell" + n;
+
+      if (n === 1) cell.classList.add("start");
+      if (n === 100) cell.classList.add("finish");
+
+      const number = document.createElement("span");
+      number.className = "number";
+      number.textContent = n;
+
+      const special = document.createElement("span");
+      special.className = "special";
+      special.textContent = n === 1 ? "MULAI" : n === 100 ? "FINIS" : "";
+
+      const tokens = document.createElement("div");
+      tokens.className = "tokens";
+      tokens.id = "tokens" + n;
+
+      cell.append(number, special, tokens);
+      board.appendChild(cell);
+    });
+  }
+
+  const svg = svgEl("svg", {
+    id: "boardArt",
+    viewBox: "0 0 1000 1000",
+    preserveAspectRatio: "none",
+    "aria-hidden": "true"
+  });
+
+  board.appendChild(svg);
+
+  Object.entries(ladders).forEach(([from, to]) => {
+    drawLadder(svg, Number(from), to);
+  });
+
+  Object.entries(snakes).forEach(([from, to], index) => {
+    drawSnake(svg, Number(from), to, index);
+  });
+
+  syncSnakes();
+}
+
+function drawLadder(svg, from, to) {
+  const a = center(from);
+  const b = center(to);
+
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const length = Math.hypot(dx, dy);
+  const ox = -dy / length * 10;
+  const oy = dx / length * 10;
+
+  const group = svgEl("g", {
+    style: "filter:drop-shadow(2px 4px 1px #38200e88)"
+  });
+
+  svg.appendChild(group);
+
+  [[ox, oy], [-ox, -oy]].forEach(([x, y]) => {
+    group.appendChild(svgEl("line", {
+      x1: a.x + x,
+      y1: a.y + y,
+      x2: b.x + x,
+      y2: b.y + y,
+      stroke: "#70401d",
+      "stroke-width": 10,
+      "stroke-linecap": "round"
+    }));
+  });
+
+  const steps = Math.max(3, Math.floor(length / 23));
+
+  for (let i = 1; i < steps; i++) {
+    const t = i / steps;
+    const x = a.x + dx * t;
+    const y = a.y + dy * t;
+
+    group.appendChild(svgEl("line", {
+      x1: x + ox,
+      y1: y + oy,
+      x2: x - ox,
+      y2: y - oy,
+      stroke: "#f1c27a",
+      "stroke-width": 7,
+      "stroke-linecap": "round"
+    }));
+  }
+}
+
+function drawSnake(svg, from, to, index) {
+  const head = center(from);
+  const tail = center(to);
+
+  const dx = tail.x - head.x;
+  const dy = tail.y - head.y;
+  const length = Math.hypot(dx, dy);
+  const nx = -dy / length;
+  const ny = dx / length;
+  const amplitude = 18 + index % 3 * 3;
+
+  const colors = [
+    "#347b42",
+    "#b64c35",
+    "#7960a7",
+    "#bd8138",
+    "#277b7b"
+  ];
+
+  const color = colors[index % colors.length];
+
+  const group = svgEl("g", {
+    class: "snake-creature"
+  });
+
+  svg.appendChild(group);
+
+  const curve = value => [
+    `M ${head.x} ${head.y}`,
+    `C ${head.x + dx * .9 + 40 + nx * value}`,
+    `${head.y + dy * .2 - 45 + ny * value},`,
+    `${head.x + dx * .2 - 40 - nx * value}`,
+    `${head.y + dy * .8 + 45 - ny * value},`,
+    `${tail.x} ${tail.y}`
+  ].join(" ");
+
+  const values = [0, amplitude, 0, -amplitude, 0]
+    .map(curve)
+    .join(";");
+
+  const layers = [
+    {
+      stroke: "#432718",
+      "stroke-width": 32,
+      opacity: .4
+    },
+    {
+      stroke: color,
+      "stroke-width": 25
+    },
+    {
+      stroke: "#fff0c8",
+      "stroke-width": 3,
+      "stroke-dasharray": "5 12",
+      opacity: .65
+    }
+  ];
+
+  layers.forEach(layer => {
+    const path = svgEl("path", {
+      d: curve(0),
+      fill: "none",
+      "stroke-linecap": "round",
+      ...layer
+    });
+
+    path.appendChild(svgEl("animate", {
+      attributeName: "d",
+      values,
+      dur: (3.8 + index * .27) + "s",
+      repeatCount: "indefinite",
+      calcMode: "spline",
+      keyTimes: "0;0.25;0.5;0.75;1",
+      keySplines:
+        ".37 0 .63 1;.37 0 .63 1;.37 0 .63 1;.37 0 .63 1"
+    }));
+
+    group.appendChild(path);
+  });
+
+  group.appendChild(svgEl("ellipse", {
+    cx: head.x,
+    cy: head.y,
+    rx: 23,
+    ry: 19,
+    fill: color,
+    stroke: "#432718",
+    "stroke-width": 3
+  }));
+
+  [-8, 8].forEach(offset => {
+    group.appendChild(svgEl("circle", {
+      cx: head.x + offset,
+      cy: head.y - 6,
+      r: 5,
+      fill: "#fff"
+    }));
+
+    group.appendChild(svgEl("circle", {
+      cx: head.x + offset,
+      cy: head.y - 6,
+      r: 2.5,
+      fill: "#24170f"
+    }));
+  });
+
+  const tongue = svgEl("path", {
+    d: `M ${head.x} ${head.y + 15} l -4 13 m 4 -13 l 4 13`,
+    fill: "none",
+    stroke: "#e33",
+    "stroke-width": 4,
+    "stroke-linecap": "round"
+  });
+
+  tongue.appendChild(svgEl("animate", {
+    attributeName: "opacity",
+    values: "1;1;0;0;1",
+    keyTimes: "0;0.15;0.2;0.85;1",
+    dur: (2.5 + index * .23) + "s",
+    repeatCount: "indefinite"
+  }));
+
+  group.appendChild(tongue);
+}
+
+function syncSnakes() {
+  const art = $("boardArt");
+
+  if (art && typeof art.pauseAnimations === "function") {
+    if (snakesMoving) art.unpauseAnimations();
+    else art.pauseAnimations();
+  }
+
+  $("snakeMotion").textContent =
+    "GERAK ULAR: " + (snakesMoving ? "ON" : "OFF");
+
+  $("snakeMotion").setAttribute(
+    "aria-pressed",
+    String(snakesMoving)
+  );
+}
+
+function toggleSnakes() {
+  snakesMoving = !snakesMoving;
+  syncSnakes();
+}
+
+function updateFurthest(player) {
+  player.furthest = Math.max(
+    player.furthest,
+    player.position
+  );
+}
+
+function medalsFor(player) {
+  const medals = [];
+
+  if (player.attempts >= 5) medals.push("Penjawab Aktif");
+  if (player.correct >= 5) medals.push("Ahli Sejarah");
+  if (player.furthest >= 50) medals.push("Penjelajah");
+  if (player.champion) medals.push("Juara");
+
+  return medals;
+}
+
+function renderRanking() {
+  const root = $("leaderboard");
+  root.replaceChildren();
+
+  const sorted = [...players].sort((a, b) => {
+    return b.position - a.position || b.score - a.score;
+  });
+
+  let previous = null;
+  let rank = 0;
+
+  sorted.forEach((player, index) => {
+    if (
+      !previous ||
+      player.position !== previous.position ||
+      player.score !== previous.score
+    ) {
+      rank = index + 1;
+    }
+
+    const row = document.createElement("div");
+    row.className = "rank-row";
+
+    if (player === players[currentPlayer]) {
+      row.classList.add("current");
+    }
+
+    const rankNumber = document.createElement("span");
+    rankNumber.className = "rank-num";
+    rankNumber.textContent = rank + ".";
+
+    const info = document.createElement("div");
+    info.className = "rank-info";
+
+    const name = document.createElement("strong");
+    name.textContent = player.name;
+
+    const detail = document.createElement("small");
+    detail.textContent =
+      "Posisi " + player.position + " • " + player.score + " poin";
+
+    const medals = document.createElement("div");
+    medals.className = "medals";
+
+    medalsFor(player).forEach(title => {
+      const badge = document.createElement("span");
+      badge.className = "medal";
+      badge.textContent = title;
+      medals.appendChild(badge);
+    });
+
+    info.append(name, detail, medals);
+    row.append(rankNumber, info);
+    root.appendChild(row);
+
+    previous = player;
+  });
+}
+
+function renderGiftProgress() {
+  const root = $("giftProgress");
+  root.replaceChildren();
+
+  players.forEach(player => {
+    const row = document.createElement("div");
+    row.className = "gift-progress-row";
+
+    const label = document.createElement("div");
+    label.textContent =
+      player.name + ": " + player.progress + "/3 benar";
+
+    const meter = document.createElement("div");
+    meter.className = "gift-meter";
+
+    const fill = document.createElement("span");
+    fill.style.width = player.progress / 3 * 100 + "%";
+
+    meter.appendChild(fill);
+    row.append(label, meter);
+    root.appendChild(row);
+  });
+
+  const player = players[currentPlayer];
+  const ready = Boolean(player && player.progress >= 3);
+
+  $("sideGift").disabled =
+    !(phase === "gift-ready" && !player?.bot);
+
+  $("sideGift").classList.toggle("ready", ready);
+
+  $("giftLabel").textContent =
+    ready ? "AMBIL KARTU" : "TERKUNCI";
+
+  $("giftHint").textContent = ready
+    ? "Kartu siap! Setelah soal ditutup, klik kartu ini untuk mengambil hadiah."
+    : "Setiap 3 jawaban benar kumulatif membuka kartu. Salah atau waktu habis tidak menghapus progres.";
+}
+
+function updateBoard() {
+  for (let n = 1; n <= 100; n++) {
+    $("tokens" + n).replaceChildren();
+  }
+
+  players.forEach((player, index) => {
+    updateFurthest(player);
+
+    if (!player.position) return;
+
+    const token = document.createElement("span");
+    token.className = "pawn " + (index === 0 ? "red" : "blue");
+    token.setAttribute("role", "img");
+    token.setAttribute(
+      "aria-label",
+      player.name + ", kotak " + player.position
+    );
+
+    $("tokens" + player.position).appendChild(token);
+  });
+
+  $("turnText").textContent =
+    players[currentPlayer]?.name || "Pemain";
+
+  $("rollBtn").disabled =
+    phase !== "ready" || Boolean(players[currentPlayer]?.bot);
+
+  renderRanking();
+  renderGiftProgress();
+}
+
+function scheduleBot() {
+  if (phase === "ready" && players[currentPlayer]?.bot) {
+    later(() => rollDice(true), 900);
+  }
+}
+
+function rollDice(fromBot = false) {
+  if (phase !== "ready") return;
+  if (players[currentPlayer].bot && !fromBot) return;
+
+  phase = "rolling";
+
+  $("dice").classList.add("rolling");
+  updateBoard();
+  playSound("dice");
+
+  let count = 0;
+
+  rollingTimer = setInterval(() => {
+    $("dice").textContent =
+      faces[Math.floor(Math.random() * faces.length)];
+
+    if (++count >= 15) {
+      clearInterval(rollingTimer);
+      rollingTimer = null;
+
+      diceValue = Math.floor(Math.random() * 6) + 1;
+      $("dice").textContent = faces[diceValue - 1];
+      $("dice").classList.remove("rolling");
+
+      $("status").textContent =
+        players[currentPlayer].name +
+        " mendapat angka " + diceValue +
+        ". Jawab soal untuk melangkah!";
+
+      playSound("diceEnd");
+      later(showQuestion, 350);
+    }
+  }, 85);
+}
+
+function nextQuestion() {
+  if (questionDeck.length === 0) {
+    questionDeck = questions.map((_, index) => index);
+
+    for (let i = questionDeck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [questionDeck[i], questionDeck[j]] =
+        [questionDeck[j], questionDeck[i]];
+    }
+  }
+
+  return questions[questionDeck.pop()];
+}
+
+function showQuestion() {
+  if (phase !== "rolling") return;
+
+  phase = "quiz";
+  pendingQuestion = nextQuestion();
+  selectedOptions = new Set();
+  lastCorrect = false;
+  lastWarningSecond = null;
+
+  const complex = pendingQuestion.t === "complex";
+
+  const type = complex
+    ? "PILIHAN GANDA KOMPLEKS"
+    : pendingQuestion.t === "tf"
+      ? "BENAR ATAU SALAH"
+      : "PILIHAN GANDA";
+
+  $("questionNumber").textContent =
+    "SOAL " + (++turnCount) +
+    " • " + type +
+    " • DADU " + diceValue;
+
+  $("question").textContent = pendingQuestion.q;
+
+  $("quizHint").textContent = complex
+    ? "Pilih semua jawaban yang benar, lalu tekan Kirim Jawaban. Semua pilihan harus tepat."
+    : "Pilih satu jawaban sebelum waktu habis.";
+
+  $("answers").replaceChildren();
+
+  pendingQuestion.a.forEach((answer, index) => {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent =
+      String.fromCharCode(65 + index) + ". " + answer;
+
+    if (complex) {
+      button.setAttribute("aria-pressed", "false");
+    }
+
+    button.onclick = () => selectAnswer(index);
+    $("answers").appendChild(button);
+  });
+
+  $("feedback").textContent = "";
+
+  show("bigX", false);
+  show("nextBtn", false);
+  show("submitComplex", complex);
+  $("submitComplex").disabled = true;
+
+  show("quizOverlay", true);
+
+  deadline = Date.now() + 30000;
+
+  tickQuiz();
+  quizTimer = setInterval(tickQuiz, 100);
+
+  updateBoard();
+
+  if (players[currentPlayer].bot) {
+    later(botAnswer, 1400);
+  } else {
+    $("answers").firstElementChild?.focus();
+  }
+}
+
+function tickQuiz() {
+  if (phase !== "quiz") return;
+
+  const milliseconds = Math.max(0, deadline - Date.now());
+  const seconds = Math.ceil(milliseconds / 1000);
+
+  $("timerLabel").textContent = seconds + " detik";
+  $("timerFill").style.width =
+    milliseconds / 30000 * 100 + "%";
+
+  $("timerWrap").classList.toggle(
+    "urgent",
+    milliseconds <= 10000
+  );
+
+  if (
+    seconds > 0 &&
+    seconds <= 5 &&
+    seconds !== lastWarningSecond
+  ) {
+    lastWarningSecond = seconds;
+    playSound("tick");
+  }
+
+  if (milliseconds <= 0) {
+    checkAnswer([], true);
+  }
+}
+
+function selectAnswer(index) {
+  if (phase !== "quiz") return;
+  if (players[currentPlayer].bot) return;
+
+  if (Date.now() >= deadline) {
+    checkAnswer([], true);
+    return;
+  }
+
+  if (pendingQuestion.t !== "complex") {
+    checkAnswer([index]);
+    return;
+  }
+
+  if (selectedOptions.has(index)) {
+    selectedOptions.delete(index);
+  } else {
+    selectedOptions.add(index);
+  }
+
+  const button = $("answers").children[index];
+  const active = selectedOptions.has(index);
+
+  button.classList.toggle("selected", active);
+  button.setAttribute("aria-pressed", String(active));
+
+  $("submitComplex").disabled = selectedOptions.size === 0;
+}
+
+function submitComplexAnswer() {
+  if (
+    phase !== "quiz" ||
+    players[currentPlayer].bot ||
+    selectedOptions.size === 0
+  ) {
+    return;
+  }
+
+  checkAnswer([...selectedOptions]);
+}
+
+function botAnswer() {
+  if (phase !== "quiz") return;
+
+  const keys = Array.isArray(pendingQuestion.c)
+    ? pendingQuestion.c
+    : [pendingQuestion.c];
+
+  const good = Math.random() < .78;
+  let choice;
+
+  if (good) {
+    choice = [...keys];
+  } else if (pendingQuestion.t === "complex") {
+    choice = [keys[0]];
+  } else {
+    choice = [(keys[0] + 1) % pendingQuestion.a.length];
+  }
+
+  checkAnswer(choice);
+}
+
+function checkAnswer(choice, timedOut = false) {
+  if (phase !== "quiz") return;
+
+  timedOut = timedOut || Date.now() >= deadline;
+  phase = "answered";
+
+  clearInterval(quizTimer);
+  quizTimer = null;
+
+  const player = players[currentPlayer];
+
+  const keys = Array.isArray(pendingQuestion.c)
+    ? pendingQuestion.c
+    : [pendingQuestion.c];
+
+  const chosen = Array.isArray(choice) ? choice : [choice];
+
+  lastCorrect =
+    !timedOut &&
+    chosen.length === keys.length &&
+    keys.every(index => chosen.includes(index));
+
+  if (!timedOut) {
+    player.attempts++;
+  }
+
+  [...$("answers").children].forEach((button, index) => {
+    button.disabled = true;
+
+    if (keys.includes(index)) {
+      button.classList.add("correct");
+    } else if (chosen.includes(index)) {
+      button.classList.add("wrong");
+    }
+  });
+
+  show("submitComplex", false);
+
+  if (lastCorrect) {
+    player.score += 10;
+    player.correct++;
+    player.progress++;
+
+    const target = player.position + diceValue;
+
+    if (target <= 100) {
+      player.position = target;
+    }
+
+    updateFurthest(player);
+
+    $("feedback").textContent =
+      "BENAR! +10 poin. " +
+      (target <= 100
+        ? "Kamu maju sesuai angka dadu."
+        : "Dadu melebihi kotak 100, posisi tetap.") +
+      (player.progress >= 3
+        ? " Kartu hadiah siap di samping papan!"
+        : " Progres kartu: " + player.progress + "/3 benar.");
+
+    $("feedback").style.color = "#20723c";
+    playSound("correct");
+  } else {
+    show("bigX", true);
+
+    $("feedback").style.color = "#b21f1b";
+
+    $("feedback").textContent =
+      (timedOut
+        ? "WAKTU HABIS! Otomatis dianggap salah."
+        : "SALAH!") +
+      " Tidak maju. Jawaban benar: " +
+      keys.map(index => String.fromCharCode(65 + index)).join(", ") +
+      ". Progres kartu tetap " + player.progress + "/3.";
+
+    playSound(timedOut ? "warning" : "wrong");
+  }
+
+  $("nextBtn").textContent =
+    player.progress >= 3
+      ? "LANJUT KE KARTU HADIAH"
+      : "LANJUTKAN";
+
+  show("nextBtn", true);
+  updateBoard();
+
+  if (player.bot) {
+    later(finishTurn, 2400);
+  } else {
+    $("nextBtn").focus();
+  }
+}
+
+function finishTurn() {
+  if (phase !== "answered") return;
+
+  clearTasks();
+  show("quizOverlay", false);
+
+  const player = players[currentPlayer];
+
+  let message =
+    player.name + " berada di kotak " + player.position + ".";
+
+  if (lastCorrect) {
+    if (ladders[player.position]) {
+      const old = player.position;
+      player.position = ladders[old];
+
+      message =
+        player.name + " naik tangga dari " +
+        old + " ke " + player.position + "!";
+
+      playSound("ladder");
+    } else if (snakes[player.position]) {
+      const old = player.position;
+      player.position = snakes[old];
+
+      message =
+        player.name + " terkena ular dan turun dari " +
+        old + " ke " + player.position + ".";
+
+      playSound("snake");
+    }
+  }
+
+  updateFurthest(player);
+  $("status").textContent = message;
+
+  if (player.progress >= 3) {
+    phase = "gift-ready";
+
+    $("status").textContent +=
+      " Klik kartu hadiah di samping papan.";
+
+    updateBoard();
+
+    if (player.bot) {
+      later(openGift, 900);
+    } else {
+      $("sideGift").focus();
+    }
+
+    return;
+  }
+
+  if (player.position === 100) {
+    showWinner();
+    return;
+  }
+
+  advanceTurn();
+}
+
+function advanceTurn() {
+  currentPlayer = (currentPlayer + 1) % players.length;
+  phase = "ready";
+
+  updateBoard();
+  scheduleBot();
+}
+
+function openGift() {
+  if (phase !== "gift-ready") return;
+
+  phase = "gift-open";
+  giftReward = null;
+
+  const player = players[currentPlayer];
+
+  $("giftOwner").textContent =
+    player.name + " mengumpulkan 3 jawaban benar.";
+
+  $("giftResult").textContent = "Kartu misteri";
+  $("giftResult").classList.remove("shuffling");
+
+  $("giftDetail").textContent =
+    "Kocok untuk membuka hadiah. Progres tetap 3/3 " +
+    "sampai hadiah digunakan.";
+
+  $("shuffleBtn").disabled = false;
+
+  show("shuffleBtn", true);
+  show("useBtn", false);
+  show("giftOverlay", true);
+
+  updateBoard();
+  playSound("click");
+
+  if (player.bot) {
+    later(shuffleGift, 900);
+  } else {
+    $("shuffleBtn").focus();
+  }
+}
+
+function shuffleGift() {
+  if (phase !== "gift-open") return;
+
+  phase = "gift-shuffling";
+
+  $("shuffleBtn").disabled = true;
+  $("giftResult").textContent = "Mengocok kartu...";
+  $("giftResult").classList.add("shuffling");
+
+  playSound("dice");
+
+  later(() => {
+    const player = players[currentPlayer];
+
+    const heads = Object.keys(snakes)
+      .map(Number)
+      .filter(number => number > player.position)
+      .sort((a, b) => a - b);
+
+    const rewards = [
+      {
+        name: "Naik ke Kepala Ular",
+        target: heads[0] || 100,
+        points: 0,
+        fallback: heads.length === 0
+      },
+      {
+        name: "Maju 5 Kotak",
+        target: Math.min(100, player.position + 5),
+        points: 0
+      },
+      {
+        name: "Maju 10 Kotak",
+        target: Math.min(100, player.position + 10),
+        points: 0
+      },
+      {
+        name: "Bonus 20 Poin",
+        target: player.position,
+        points: 20
+      }
+    ];
+
+    giftReward = rewards[
+      Math.floor(Math.random() * rewards.length)
+    ];
+
+    phase = "gift-revealed";
+
+    $("giftResult").classList.remove("shuffling");
+    $("giftResult").textContent = giftReward.name;
+
+    $("giftDetail").textContent = giftReward.points
+      ? "Tambahan 20 poin. Posisi tetap."
+      : "Pindah ke kotak " + giftReward.target +
+        ". Aman dari ular dan tangga pada giliran ini." +
+        (giftReward.fallback
+          ? " Tidak ada kepala ular di atas posisi ini, " +
+            "sehingga tujuan hadiah adalah kotak 100."
+          : "");
+
+    show("shuffleBtn", false);
+    show("useBtn", true);
+
+    playSound("reward");
+
+    if (player.bot) {
+      later(useGift, 2200);
+    } else {
+      $("useBtn").focus();
+    }
+  }, 1200);
+}
+
+function useGift() {
+  if (phase !== "gift-revealed" || !giftReward) return;
+
+  clearTasks();
+
+  const player = players[currentPlayer];
+
+  player.position = giftReward.target;
+  player.score += giftReward.points;
+  player.progress = 0;
+
+  updateFurthest(player);
+
+  $("status").textContent =
+    player.name + " menggunakan " + giftReward.name +
+    ". Progres kartu kembali 0/3.";
+
+  giftReward = null;
+
+  show("giftOverlay", false);
+  playSound("click");
+
+  if (player.position === 100) {
+    showWinner();
+    return;
+  }
+
+  advanceTurn();
+}
+
+function showWinner() {
+  clearTasks();
+  phase = "won";
+
+  const player = players[currentPlayer];
+  player.champion = true;
+
+  updateBoard();
+
+  $("winner").textContent = player.name + " MENANG!";
+
+  $("finalScore").textContent =
+    player.score + " poin • Medali: " +
+    medalsFor(player).join(", ");
+
+  show("winOverlay", true);
+  playSound("win");
+}
+
+/* AUDIO PERMAINAN */
+
+let audioContext = null;
+let master = null;
+let musicBus = null;
+let musicClock = null;
+let musicNext = 0;
+let musicStep = 0;
+
+let soundOn = true;
+let musicEnabled = true;
+let unlocked = false;
+let openingPlayed = false;
+let volume = .65;
+
+let noiseBuffer = null;
+let lastHiss = -Infinity;
+
+const voices = new Map();
+
+const melody = [
+  76, 79, 81, 79, 76, 72, 74, 76,
+  79, 81, 84, 81, 79, 76, 74, 0,
+  77, 81, 84, 81, 77, 74, 76, 77,
+  79, 76, 74, 71, 72, 0, 79, 0
+];
+
+function setupAudio() {
+  if (!audioContext) {
+    const AudioClass =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioClass) {
+      throw new Error("Web Audio tidak tersedia.");
+    }
+
+    audioContext = new AudioClass();
+  }
+
+  if (!master) {
+    master = audioContext.createGain();
+    master.gain.value = volume;
+
+    const limiter = audioContext.createDynamicsCompressor();
+    limiter.threshold.value = -12;
+    limiter.ratio.value = 8;
+
+    master.connect(limiter);
+    limiter.connect(audioContext.destination);
+
+    musicBus = audioContext.createGain();
+    musicBus.gain.value = .12;
+    musicBus.connect(master);
+  }
+}
+
+function registerVoice(source, channel, cleanup) {
+  voices.set(source, channel);
+
+  source.onended = () => {
+    voices.delete(source);
+    cleanup();
+  };
+}
+
+function stopVoices(channel = null) {
+  for (const [source, sourceChannel] of voices) {
+    if (channel !== null && sourceChannel !== channel) continue;
+
+    try {
+      source.stop();
+    } catch (_) {}
+  }
+}
+
+function beep(
+  frequency,
+  start,
+  duration,
+  amplitude,
+  type = "triangle",
+  channel = "effect"
+) {
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency, start);
+
+  gain.gain.setValueAtTime(.0001, start);
+  gain.gain.exponentialRampToValueAtTime(
+    amplitude,
+    start + .012
+  );
+  gain.gain.exponentialRampToValueAtTime(
+    .0001,
+    start + duration
+  );
+
+  oscillator.connect(gain);
+  gain.connect(channel === "music" ? musicBus : master);
+
+  registerVoice(oscillator, channel, () => {
+    oscillator.disconnect();
+    gain.disconnect();
+  });
+
+  oscillator.start(start);
+  oscillator.stop(start + duration + .02);
+}
+
+function setVolume(value) {
+  volume = Number(value) / 100;
+  $("volumeLabel").textContent = value + "%";
+
+  if (master) {
+    master.gain.setTargetAtTime(
+      volume,
+      audioContext.currentTime,
+      .03
+    );
+  }
+}
+
+async function enableAudio() {
+  if (!soundOn) return;
+
+  try {
+    setupAudio();
+    await audioContext.resume();
+
+    if (audioContext.state !== "running") return;
+
+    unlocked = true;
+    show("audioPrompt", false);
+
+    if (!openingPlayed) {
+      openingPlayed = true;
+      playSound("start");
+    }
+
+    startMusic();
+  } catch (_) {
+    $("audioPrompt").textContent =
+      "Klik lagi untuk mengaktifkan suara";
+    show("audioPrompt", true);
+  }
+}
+
+function playSound(type) {
+  if (!soundOn || !unlocked || document.hidden) return;
+
+  try {
+    setupAudio();
+
+    if (audioContext.state !== "running") return;
+
+    const notes = {
+      start: [523, 659, 784, 1047],
+      dice: [350, 500, 650, 800],
+      diceEnd: [700, 950, 1100],
+      correct: [600, 800, 1000, 1200],
+      wrong: [180, 130, 90],
+      warning: [220, 130, 220, 90],
+      ladder: [450, 650, 850, 1050, 1250],
+      snake: [600, 420, 280, 150],
+      win: [523, 659, 784, 1047, 1318, 1568],
+      reward: [659, 784, 988, 1318],
+      click: [500, 700],
+      tick: [1100]
+    }[type] || [400];
+
+    const now = audioContext.currentTime;
+    const harsh = type === "wrong" || type === "warning";
+
+    notes.forEach((frequency, index) => {
+      beep(
+        frequency,
+        now + index * .12,
+        type === "tick" ? .055 : .2,
+        harsh ? .22 : .17,
+        harsh ? "sawtooth" : "triangle"
+      );
+    });
+
+    if (type === "snake") {
+      hiss();
+    }
+  } catch (_) {}
+}
+
+function hiss() {
+  if (!soundOn || !unlocked || document.hidden) return;
+
+  setupAudio();
+
+  if (audioContext.state !== "running") return;
+
+  const now = audioContext.currentTime;
+
+  if (now - lastHiss < .25) return;
+  lastHiss = now;
+
+  if (!noiseBuffer) {
+    noiseBuffer = audioContext.createBuffer(
+      1,
+      Math.ceil(audioContext.sampleRate * 1.1),
+      audioContext.sampleRate
+    );
+
+    const data = noiseBuffer.getChannelData(0);
+
+    for (let i = 0; i < data.length; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+  }
+
+  const source = audioContext.createBufferSource();
+  const filter = audioContext.createBiquadFilter();
+  const gain = audioContext.createGain();
+
+  source.buffer = noiseBuffer;
+
+  filter.type = "bandpass";
+  filter.frequency.setValueAtTime(4200, now);
+  filter.frequency.exponentialRampToValueAtTime(
+    1900,
+    now + 1
+  );
+  filter.Q.value = .85;
+
+  gain.gain.setValueAtTime(.0001, now);
+  gain.gain.exponentialRampToValueAtTime(.35, now + .12);
+  gain.gain.setValueAtTime(.25, now + .55);
+  gain.gain.exponentialRampToValueAtTime(
+    .0001,
+    now + 1.05
+  );
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(master);
+
+  registerVoice(source, "effect", () => {
+    source.disconnect();
+    filter.disconnect();
+    gain.disconnect();
+  });
+
+  source.start(now);
+  source.stop(now + 1.08);
+}
+
+async function testHiss() {
+  soundOn = true;
+  $("soundToggle").textContent = "SUARA: ON";
+
+  await enableAudio();
+  hiss();
+}
+
+function pumpMusic() {
+  if (
+    !soundOn ||
+    !musicEnabled ||
+    document.hidden ||
+    audioContext.state !== "running"
+  ) {
+    return;
+  }
+
+  if (musicNext < audioContext.currentTime) {
+    musicNext = audioContext.currentTime + .03;
+  }
+
+  while (musicNext < audioContext.currentTime + .15) {
+    const index = musicStep % melody.length;
+    const note = melody[index];
+
+    if (note) {
+      beep(
+        440 * Math.pow(2, (note - 69) / 12),
+        musicNext,
+        .15,
+        .32,
+        "triangle",
+        "music"
+      );
+    }
+
+    if (musicStep % 2 === 0) {
+      const root =
+        [48, 45, 53, 55][Math.floor(index / 8)] +
+        (musicStep % 4 === 0 ? 0 : 7);
+
+      beep(
+        440 * Math.pow(2, (root - 69) / 12),
+        musicNext,
+        .19,
+        .32,
+        "sine",
+        "music"
+      );
+    }
+
+    musicNext += .205;
+    musicStep++;
+  }
+}
+
+function startMusic() {
+  if (
+    !unlocked ||
+    !soundOn ||
+    !musicEnabled ||
+    document.hidden ||
+    musicClock
+  ) {
+    return;
+  }
+
+  setupAudio();
+
+  if (audioContext.state !== "running") return;
+
+  musicNext = audioContext.currentTime + .05;
+  pumpMusic();
+
+  musicClock = setInterval(pumpMusic, 60);
+}
+
+function stopMusic() {
+  clearInterval(musicClock);
+  musicClock = null;
+  stopVoices("music");
+}
+
+function toggleMusic() {
+  musicEnabled = !musicEnabled;
+
+  $("musicButton").textContent =
+    "MUSIK: " + (musicEnabled ? "ON" : "OFF");
+
+  if (musicEnabled) {
+    if (soundOn) enableAudio();
+  } else {
+    stopMusic();
+  }
+}
+
+function toggleSound() {
+  soundOn = !soundOn;
+
+  $("soundToggle").textContent =
+    "SUARA: " + (soundOn ? "ON" : "OFF");
+
+  if (soundOn) {
+    enableAudio();
+  } else {
+    stopMusic();
+    stopVoices();
+
+    if (audioContext) {
+      audioContext.suspend().catch(() => {});
+    }
+
+    show("audioPrompt", false);
+  }
+}
+
+document.addEventListener("pointerdown", () => {
+  if (!unlocked && soundOn) {
+    enableAudio();
+  }
+}, true);
+
+document.addEventListener("keydown", event => {
+  if (
+    !unlocked &&
+    soundOn &&
+    (event.key === "Enter" || event.key === " ")
+  ) {
+    enableAudio();
+  }
+}, true);
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    stopMusic();
+    stopVoices();
+
+    if (audioContext) {
+      audioContext.suspend().catch(() => {});
+    }
+  } else {
+    if (phase === "quiz") {
+      tickQuiz();
+    }
+
+    if (unlocked && soundOn && audioContext) {
+      audioContext.resume().then(startMusic).catch(() => {});
+    }
+  }
+});
+
+createBoard();
+setMode("human");
+</script>
+</body>
+</html>
